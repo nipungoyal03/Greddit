@@ -1,0 +1,25 @@
+version: '3'
+services:
+  gredditfrontend:
+    hostname: gredditfrontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.reactUI
+    ports:
+      - '3000:3000'
+    depends_on:
+      - gredditbackend   
+
+  gredditbackend: 
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.node
+    ports: 
+      - '4000:4000'    #external:internal 
+  nginx: 
+    restart: always
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports: 
+      - '80:80'

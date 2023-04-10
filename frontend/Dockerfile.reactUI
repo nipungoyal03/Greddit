@@ -1,0 +1,18 @@
+FROM node:19
+
+# the working directory of the docker container image
+WORKDIR /app
+
+# all the files needed to copy from the host machine to the docker container image
+COPY ./package.json ./package.json
+COPY ./public ./public
+
+# copy the source code into the docker container image
+COPY ./src ./src
+
+RUN npm install
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
+
